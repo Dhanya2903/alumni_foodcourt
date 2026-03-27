@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = axios.create({ baseURL: process.env.REACT_APP_API_URL || 'https://alumni-foodcourt-2.onrender.com/api' });
+const API = axios.create({ baseURL: process.env.REACT_APP_API_URL || 'https://dls-billingsystem.onrender.com/api' });
 
 API.interceptors.request.use((req) => {
     const token = localStorage.getItem('token');
