@@ -7,11 +7,20 @@ API.interceptors.request.use((req) => {
     if (token) {
         req.headers.Authorization = `Bearer ${token}`;
     }
+    console.log(`Making ${req.method.toUpperCase()} request to: ${req.baseURL}${req.url}`);
     return req;
 });
 
-export const login = (formData) => API.post('/auth/login', formData);
-export const register = (formData) => API.post('/auth/register', formData);
+API.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        console.error('API Error:', error.response ? error.response.data : error.message);
+        return Promise.reject(error);
+    }
+);
+
+export const login = (formData) => API.post('/login', formData);
+export const register = (formData) => API.post('/register', formData);
 
 export const getFoodByCategory = (category) => API.get(`/food/category/${category}`);
 export const getAllFood = () => API.get('/food');
